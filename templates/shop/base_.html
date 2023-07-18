@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}my store{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    {% block 'title' %}{% endblock %}
+
+</head>
+
+{% include 'shop/blocks/_header.html'%}
+
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+        В корзине:
+        <a href="{% url 'cart:cart_detail' %}">
+            {{ total_items }} шт ,${{ cart.get_total_price }}
+        </a>
+        {% else %}
+        Cart is empty
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+
+
+{% include 'shop/blocks/_footer.html'%}
+</body>
+</html>
+
+
+
+
